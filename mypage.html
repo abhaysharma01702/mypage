@@ -1,36 +1,936 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>About Me</title>
+    <title>Abhay Sharma - Portfolio</title>
+    <style>
+        /* Global styles with dark theme */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
+            color: #e0e0e0;
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* Header section with hero content */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            background: radial-gradient(circle at center, #2d2d2d, #1a1a1a);
+        }
+
+        .hero-content {
+            max-width: 1200px;
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+            gap: 50px;
+            align-items: center;
+        }
+
+        /* Photo section styling */
+        .photo-section {
+            text-align: center;
+        }
+
+        .photo-container {
+            width: 300px;
+            height: 300px;
+            border-radius: 50%;
+            background: linear-gradient(45deg, #4CAF50, #81C784);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px;
+            box-shadow: 0 10px 30px rgba(76, 175, 80, 0.3);
+            transition: transform 0.3s ease;
+        }
+
+        .photo-container:hover {
+            transform: scale(1.05);
+        }
+
+        .photo-placeholder {
+            width: 280px;
+            height: 280px;
+            border-radius: 50%;
+            background: #3d3d3d;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            color: #888;
+            border: 3px solid #4CAF50;
+            overflow: hidden; 
+        }
+
+         .photo-placeholder img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover; /* Prevents stretching and ensures coverage */
+        } /* Main content styling */
+
+        /* Main content styling */
+        .intro {
+            padding: 20px;
+        }
+
+        .intro h1 {
+            font-size: 3.5rem;
+            color: #4CAF50;
+            margin-bottom: 10px;
+            font-weight: bold;
+        }
+
+        .intro .subtitle {
+            font-size: 1.5rem;
+            color: #81C784;
+            margin-bottom: 20px;
+        }
+
+        .contact-info {
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+            margin-bottom: 30px;
+        }
+
+        .contact-item {
+            background: #3d3d3d;
+            padding: 10px 15px;
+            border-radius: 25px;
+            font-size: 0.9rem;
+            border: 1px solid #4CAF50;
+            text-decoration: none;
+            color: #e0e0e0;
+            transition: all 0.3s ease;
+            display: inline-block;
+        }
+
+        .contact-item:hover {
+            background: #4CAF50;
+            color: white;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(76, 175, 80, 0.3);
+        }
+
+        /* Non-clickable contact items */
+        .contact-item.non-clickable {
+            cursor: default;
+        }
+
+        .contact-item.non-clickable:hover {
+            background: #3d3d3d;
+            color: #e0e0e0;
+            transform: none;
+            box-shadow: none;
+        }
+
+        /* Navigation menu */
+        .nav-menu {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: rgba(45, 45, 45, 0.9);
+            border-radius: 25px;
+            padding: 10px;
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+        }
+
+        .nav-menu a {
+            color: #e0e0e0;
+            text-decoration: none;
+            padding: 10px 20px;
+            margin: 0 5px;
+            border-radius: 20px;
+            transition: all 0.3s ease;
+            display: inline-block;
+        }
+
+        .nav-menu a:hover {
+            background: #4CAF50;
+            color: white;
+        }
+
+        /* Content sections */
+        .section {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 80px 20px;
+        }
+
+        .section h2 {
+            font-size: 2.5rem;
+            color: #4CAF50;
+            margin-bottom: 40px;
+            text-align: center;
+            position: relative;
+        }
+
+        .section h2::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 3px;
+            background: #4CAF50;
+        }
+
+        /* Publications section */
+        .publication-card {
+            cursor: pointer !important;
+            transition: all 0.3s ease;
+            user-select: none;
+        }
+
+        .publication-card:hover {
+            border-left-color: #81C784;
+            background: #353535;
+            transform: translateY(-5px) scale(1.02);
+            box-shadow: 0 15px 35px rgba(76, 175, 80, 0.3);
+        }
+
+        .publication-card:active {
+            transform: translateY(-3px) scale(1.01);
+        }
+
+        .publication-link {
+            margin-top: 15px;
+            color: #4CAF50;
+            font-weight: bold;
+            font-size: 0.9rem;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            pointer-events: none;
+        }
+
+        .link-icon {
+            font-size: 1.1rem;
+        }
+
+        .publication-card:hover .publication-link {
+            color: #81C784;
+        }
+
+        /* Education and Experience cards */
+        .card {
+            background: #2d2d2d;
+            border-radius: 15px;
+            padding: 30px;
+            margin-bottom: 30px;
+            border-left: 5px solid #4CAF50;
+            transition: transform 0.3s ease;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+        }
+
+        .card h3 {
+            color: #81C784;
+            font-size: 1.4rem;
+            margin-bottom: 10px;
+        }
+
+        .card .institution {
+            color: #4CAF50;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        .card .duration {
+            color: #888;
+            font-size: 0.9rem;
+            margin-bottom: 15px;
+        }
+
+        .card ul {
+            padding-left: 20px;
+        }
+
+        .card li {
+            margin-bottom: 8px;
+        }
+
+        /* Projects grid */
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 30px;
+        }
+
+        .project-card {
+            background: #2d2d2d;
+            border-radius: 15px;
+            padding: 30px;
+            border: 1px solid #4CAF50;
+            transition: all 0.3s ease;
+        }
+
+        .project-card:hover {
+            border-color: #81C784;
+            box-shadow: 0 10px 25px rgba(76, 175, 80, 0.2);
+        }
+
+        .project-card h3 {
+            color: #4CAF50;
+            margin-bottom: 15px;
+            font-size: 1.3rem;
+        }
+
+        /* Skills section */
+        .skills-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .skill-category {
+            background: #2d2d2d;
+            border-radius: 15px;
+            padding: 25px;
+            text-align: center;
+            border: 1px solid #4CAF50;
+        }
+
+        .skill-category h3 {
+            color: #4CAF50;
+            margin-bottom: 15px;
+        }
+
+        .skill-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            justify-content: center;
+        }
+
+        .skill-tag {
+            background: #4CAF50;
+            color: white;
+            padding: 8px 15px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+        }
+
+        /* Achievements section */
+        .achievements-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 20px;
+        }
+
+        .achievement-item {
+            background: #2d2d2d;
+            padding: 20px;
+            border-radius: 10px;
+            border-left: 4px solid #4CAF50;
+            transition: transform 0.3s ease;
+        }
+
+        .achievement-item:hover {
+            transform: translateX(10px);
+        }
+
+        /* Responsive design */
+        @media (max-width: 768px) {
+            .hero-content {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+
+            .intro h1 {
+                font-size: 2.5rem;
+            }
+
+            .contact-info {
+                justify-content: center;
+            }
+
+            .nav-menu {
+                position: relative;
+                top: 0;
+                right: 0;
+                margin-bottom: 20px;
+            }
+
+            .projects-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Smooth scrolling */
+        html {
+            scroll-behavior: smooth;
+        }
+
+        /* Animation for sections */
+        .section {
+            opacity: 0;
+            transform: translateY(50px);
+            animation: fadeInUp 1s ease forwards;
+        }
+
+        @keyframes fadeInUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    </style>
 </head>
+
 <body>
-    <h1>Abhay Sharma</h1>
-    <img src="image.jpeg" alt="My Photo" width="200">
-    <p><p>
-    Hello! My name is Abhay Sharma and I am currently pursuing my studies at 
-    <strong>IIIT Hyderabad</strong>, one of India’s leading institutes for 
-    technology and research. I have a deep interest in programming, data-driven 
-    problem solving, and building applications that can create real-world impact. 
-    Over the course of my studies, I have been developing a strong foundation in 
-    computer science, with a focus on coding, algorithms, and emerging 
-    technologies like machine learning and artificial intelligence. 
-    <br><br>
-    I am passionate about learning beyond the classroom, whether it is through 
-    personal projects, hackathons, or collaborative teamwork. I believe in 
-    constantly challenging myself, improving my skills, and exploring new 
-    opportunities to innovate. My long-term goal is to contribute to impactful 
-    solutions in technology that benefit society while also advancing my 
-    knowledge and expertise as a computer scientist.
-</p>
-</p>
-    <h2>My Skills</h2>
-    <ul>
-        <li>Python Programming</li>
-        <li>Data Analysis</li>
-        <li>Machine Learning</li>
-        <li>Problem Solving</li>
-    </ul>
+    <!-- Navigation Menu -->
+    <nav class="nav-menu">
+        <a href="#home">Home</a>
+        <a href="#education">Education</a>
+        <a href="#experience">Experience</a>
+        <a href="#projects">Projects</a>
+        <a href="#skills">Skills</a>
+        <a href="#achievements">Achievements</a>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div class="hero-content">
+            <div class="photo-section">
+                <!-- Photo placeholder - replace with actual photo -->
+                <div class="photo-container">
+                    <div class="photo-placeholder">
+                        <img src="image.jpeg" alt="A description of the image">
+                    </div>
+                </div>
+            </div>
+
+            <div class="intro">
+                <h1>Abhay Sharma</h1>
+                <div class="subtitle">MTech CSE Student & Research Enthusiast</div>
+
+                <div class="contact-info">
+                    <a href="https://www.google.co.in/maps/place/Hyderabad,+Telangana/@17.412281,78.2432316,11z/data=!3m1!4b1!4m6!3m5!1s0x3bcb99daeaebd2c7:0xae93b78392bafbc2!8m2!3d17.406498!4d78.4772439!16zL20vMDljNnc?entry=ttu&g_ep=EgoyMDI1MDkyMy4wIKXMDSoASAFQAw%3D%3D"
+                        target="_blank" class="contact-item">📍 Hyderabad</a>
+                    <a href="tel:+917803916516" class="contact-item">📞 +91 7803916516</a>
+                    <a href="https://www.linkedin.com/in/abhay-sharma-yourprofile" target="_blank"
+                        class="contact-item">💼 LinkedIn</a>
+                    <a href="https://github.com/abhaysharma01702" target="_blank" class="contact-item">🔗 GitHub</a>
+                </div>
+
+                <p style="font-size: 1.1rem; line-height: 1.8;">
+                    Passionate Computer Science graduate specializing in Deep Learning and Sentiment Analysis.
+                    Currently pursuing MTech at IIIT Hyderabad with research interests in NLP and Machine Learning.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Education Section -->
+    <section id="education" class="section">
+        <h2>Education</h2>
+
+        <div class="card">
+            <h3>Master of Technology in Computer Science and Engineering</h3>
+            <div class="institution">International Institute of Information Technology, Hyderabad</div>
+            <div class="duration">July 2025 – July 2027</div>
+            <p><strong>CGPA:</strong> 8.41 / 10</p>
+        </div>
+
+        <div class="card">
+            <h3>Bachelor of Technology in Information Technology</h3>
+            <div class="institution">Indian Institute of Information Technology, Bhopal</div>
+            <div class="duration">Dec 2020 – June 2024</div>
+            <p><strong>CGPA:</strong> 8.41 / 10</p>
+            <p><strong>Coursework:</strong> Data Structures and Algorithms, Database Management System,
+                Operating Systems, Computer Networks, Design and Analysis of Algorithms</p>
+        </div>
+    </section>
+
+    <!-- Experience Section -->
+    <section id="experience" class="section">
+        <h2>Experience</h2>
+
+        <div class="card">
+            <h3>Undergraduate Researcher</h3>
+            <div class="institution">IIIT Bhopal</div>
+            <div class="duration">August 2024 – February 2025</div>
+            <p><strong>Under:</strong> Dr. Dharmendra Dhangi</p>
+            <ul>
+                <li>Conducted research on deep learning–based sentiment analysis</li>
+                <li>Analyzed the semantic granularity of subword-level embeddings and their effect on classification
+                    precision</li>
+            </ul>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects" class="section">
+        <h2>Projects</h2>
+
+        <div class="projects-grid">
+            <div class="project-card">
+                <h3>Sentiment Analysis using LSTM</h3>
+                <div class="duration">Oct 2023 – Mar 2024</div>
+                <ul>
+                    <li>Designed and trained a custom stacked LSTM model with Dropout for sentiment analysis</li>
+                    <li>Analyzed performance across Amazon, IMDB, Twitter, ISEAR, and CrowdFlower datasets using
+                        multiple embeddings</li>
+                    <li>FastText consistently outperformed GloVe and Word2Vec on informal text</li>
+                </ul>
+            </div>
+
+            <div class="project-card">
+                <h3>Sales Forecasting using Machine Learning</h3>
+                <div class="duration">Feb 2023 – May 2023</div>
+                <ul>
+                    <li>Developed regression models (Linear, RF, KNN) to forecast sales from BigMart dataset</li>
+                    <li>Applied EDA, feature encoding, and hyperparameter tuning for optimized performance</li>
+                    <li><strong>Tools Used:</strong> Python, Scikit-learn, Pandas, Matplotlib, Seaborn</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section id="skills" class="section">
+        <h2>Technical Skills</h2>
+
+        <div class="skills-container">
+            <div class="skill-category">
+                <h3>Programming Languages</h3>
+                <div class="skill-tags">
+                    <span class="skill-tag">Python</span>
+                    <span class="skill-tag">HTML</span>
+                    <span class="skill-tag">CSS</span>
+                    <span class="skill-tag">Functional Programming</span>
+                    <span class="skill-tag">OOP</span>
+                </div>
+            </div>
+
+            <div class="skill-category">
+                <h3>Development Tools</h3>
+                <div class="skill-tags">
+                    <span class="skill-tag">GitHub</span>
+                    <span class="skill-tag">VS Code</span>
+                    <span class="skill-tag">Visual Studio</span>
+                    <span class="skill-tag">PyCharm</span>
+                    <span class="skill-tag">Jupyter Notebook</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Publications Section -->
+    <section id="publications" class="section">
+        <h2>Publications</h2>
+
+        <div class="card publication-card" onclick="window.open('https://doi.org/10.1007/s40009-025-01746-8', '_blank')"
+            style="cursor: pointer;">
+            <h3>"Harnessing CNNs and Embedding Techniques for Enhanced Sentiment Classification"</h3>
+            <p>Demonstrates the impact of subword-level embedding techniques in sentiment analysis tasks across various
+                datasets.</p>
+            <!-- <div class="https://doi.org/10.1007/s40009-025-01746-8">
+                <span class="link-icon">🔗</span>
+                <span>Click to view publication</span>
+            </div> -->
+        </div>
+    </section>
+
+    <!-- Achievements Section -->
+    <section id="achievements" class="section">
+        <h2>Achievements</h2>
+
+        <div class="achievements-list">
+            <div class="achievement-item">
+                <strong>GATE 2025 (DA)</strong><br>
+                Qualified with a percentile of 97.28
+            </div>
+
+            <div class="achievement-item">
+                <strong>UGC-Net 2025 (CSA)</strong><br>
+                Qualified with a percentile of 99.66
+            </div>
+
+            <div class="achievement-item">
+                <strong>PGEE 2025</strong><br>
+                Secured AIR 56 and admitted to MTech CSE at IIIT Hyderabad
+            </div>
+        </div>
+    </section>
+
+    <script>
+        // Add smooth scrolling animation for sections on scroll
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.animationDelay = '0.2s';
+                    entry.target.style.animationFillMode = 'forwards';
+                }
+            });
+        }, observerOptions);
+
+        // Observe all sections for animation
+        document.querySelectorAll('.section').forEach(section => {
+            observer.observe(section);
+        });
+
+        // Add click functionality to photo placeholder
+        // document.querySelector('.photo-placeholder').addEventListener('click', function() {
+        //     alert('Click here to upload your photo!\n\nTo add your photo:\n1. Replace this placeholder with an <img> tag\n2. Set src to your photo URL or file path\n3. Keep the same styling classes');
+        // });
+        //
+
+        // ========================================
+        // EVENT TRACKING SYSTEM
+        // ========================================
+        
+        // 3. Open browser console (F12) to see tracked events
+        //
+        // TRACKS:
+        // - Click events (all elements)
+        // - View events (elements entering viewport)
+        // - Input changes (text inputs, textareas, file uploads)
+        // - Scroll events (throttled to 200ms)
+        // - Page visibility changes (tab switching)
+        // - Page load and unload events
+        //
+        // OUTPUT FORMAT:
+        // - Timestamp: ISO 8601 format (e.g., 2025-10-03T10:30:45.123Z)
+        // - Event Type: click, view, input_change, scroll, etc.
+        // - Object Type: button, image, text, dropdown, etc.
+        // - Element Details: tag, id, class, text content
+        // - Additional Info: mouse coordinates, dimensions, etc.
+        // ========================================
+
+        /**
+        * Get element type/description for logging
+        */
+        function getElementType(element) {
+        if (!element || !element.tagName) return 'unknown';
+
+        const tag = element.tagName.toLowerCase();
+        const type = element.type || '';
+        const className = element.className || '';
+        const id = element.id || '';
+
+        // Specific element identification - CUSTOMIZE THESE FOR YOUR APP
+        if (tag === 'button') {
+        if (className.includes('btn-stop')) return 'stop_button';
+        if (className.includes('btn-go')) return 'go_button';
+        if (className.includes('btn-primary')) return 'primary_button';
+        if (className.includes('btn-secondary')) return 'secondary_button';
+        if (className.includes('upload')) return 'upload_button';
+        if (className.includes('difficulty')) return 'difficulty_button';
+        if (className.includes('start')) return 'start_button';
+        if (className.includes('shuffle')) return 'shuffle_button';
+        if (className.includes('reset')) return 'reset_button';
+        return 'button';
+        }
+
+        if (tag === 'input' && type === 'file') return 'file_input';
+        if (tag === 'input') return `input_${type || 'text'}`;
+        if (tag === 'textarea') return 'textarea';
+        if (tag === 'select') return 'dropdown';
+        if (tag === 'img') return 'image';
+        if (tag === 'a') return 'link';
+        if (tag === 'canvas') return 'canvas';
+        if (tag === 'svg' || element.ownerSVGElement) return 'svg_icon';
+        if (tag === 'table') return 'table';
+        if (tag === 'pre') return 'code_block';
+
+        // Check for specific component types by class - CUSTOMIZE THESE
+        if (className.includes('puzzle-piece')) return 'puzzle_piece';
+        if (className.includes('table-box')) return 'database_table_box';
+        if (className.includes('nash-equilibrium')) return 'nash_equilibrium_cell';
+        if (className.includes('stat-item')) return 'stat_item';
+        if (className.includes('progress-bar')) return 'progress_bar';
+
+        // Generic elements
+        if (['h1', 'h2', 'h3', 'h4', 'h5', 'h6'].includes(tag)) return 'heading';
+        if (['p', 'span', 'label', 'div'].includes(tag)) return 'text';
+        if (tag === 'tr') return 'table_row';
+        if (tag === 'td') return 'table_cell';
+        if (tag === 'th') return 'table_header';
+
+        return tag;
+        }
+
+        /**
+        * Get detailed element information
+        */
+        function getElementInfo(element) {
+        const info = {
+        tag: element.tagName.toLowerCase(),
+        id: element.id || 'none',
+        class: element.className || 'none',
+        text: element.textContent?.trim().substring(0, 50) || 'none'
+        };
+
+        if (element.tagName.toLowerCase() === 'img') {
+        info.src = element.src || 'none';
+        }
+
+        if (element.tagName.toLowerCase() === 'a') {
+        info.href = element.href || 'none';
+        }
+
+        return info;
+        }
+
+        /**
+        * Log event to console with formatting
+        */
+        function logEvent(timestamp, eventType, elementType, element, additionalInfo = {}) {
+        const elementInfo = getElementInfo(element);
+
+        console.log('%c━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━', 'color: #5FD38D');
+        console.log('%c🔍 EVENT CAPTURED', 'color: #5FD38D; font-weight: bold; font-size: 14px');
+        console.log('%c━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━', 'color: #5FD38D');
+        console.log('%c⏰ Timestamp:', 'color: #4fc279; font-weight: bold', timestamp);
+        console.log('%c📌 Event Type:', 'color: #4fc279; font-weight: bold', eventType.toUpperCase());
+        console.log('%c🎯 Object Type:', 'color: #4fc279; font-weight: bold', elementType);
+        console.log('%c📋 Element Details:', 'color: #4fc279; font-weight: bold');
+        console.table(elementInfo);
+
+        if (Object.keys(additionalInfo).length > 0) {
+        console.log('%c➕ Additional Info:', 'color: #4fc279; font-weight: bold');
+        console.table(additionalInfo);
+        }
+
+        console.log('%c━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n', 'color: #5FD38D');
+        }
+
+        /**
+        * Track all click events
+        */
+        document.addEventListener('click', function(event) {
+        const timestamp = new Date().toISOString();
+        const element = event.target;
+        const elementType = getElementType(element);
+
+        const additionalInfo = {
+        pageX: event.pageX,
+        pageY: event.pageY,
+        clientX: event.clientX,
+        clientY: event.clientY,
+        button: event.button === 0 ? 'left' : event.button === 1 ? 'middle' : 'right'
+        };
+
+        logEvent(timestamp, 'click', elementType, element, additionalInfo);
+        }, true);
+
+        /**
+        * Track element views using Intersection Observer
+        */
+        function setupViewTracking() {
+        const trackedElements = new WeakSet();
+
+        const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+        // Only log when element becomes visible and hasn't been tracked yet
+        if (entry.isIntersecting && !trackedElements.has(entry.target)) {
+        trackedElements.add(entry.target);
+
+        const timestamp = new Date().toISOString();
+        const element = entry.target;
+        const elementType = getElementType(element);
+
+        const additionalInfo = {
+        intersectionRatio: (entry.intersectionRatio * 100).toFixed(2) + '%',
+        boundingBox: {
+        top: Math.round(entry.boundingClientRect.top),
+        left: Math.round(entry.boundingClientRect.left),
+        width: Math.round(entry.boundingClientRect.width),
+        height: Math.round(entry.boundingClientRect.height)
+        }
+        };
+
+        logEvent(timestamp, 'view', elementType, element, additionalInfo);
+        }
+        });
+        }, {
+        threshold: [0.1, 0.5, 1.0], // Trigger at 10%, 50%, and 100% visibility
+        rootMargin: '0px'
+        });
+
+        // Observe all interactive and content elements
+        // CUSTOMIZE THIS ARRAY TO TRACK ONLY WHAT YOU NEED
+        const selectorsToTrack = [
+        'button', 'input', 'select', 'textarea', 'a',
+        'img', 'h1', 'h2', 'h3', 'table', 'canvas',
+        '.puzzle-piece', '.table-box', '.nash-equilibrium',
+        '[data-track]' // Add data-track attribute to any element you want to track
+        ];
+
+        selectorsToTrack.forEach(selector => {
+        document.querySelectorAll(selector).forEach(element => {
+        observer.observe(element);
+        });
+        });
+
+        // Re-observe elements when DOM changes (for dynamically generated content)
+        const mutationObserver = new MutationObserver((mutations) => {
+        mutations.forEach(mutation => {
+        mutation.addedNodes.forEach(node => {
+        if (node.nodeType === 1) { // Element node
+        selectorsToTrack.forEach(selector => {
+        if (node.matches && node.matches(selector)) {
+        observer.observe(node);
+        }
+        node.querySelectorAll && node.querySelectorAll(selector).forEach(el => {
+        observer.observe(el);
+        });
+        });
+        }
+        });
+        });
+        });
+
+        mutationObserver.observe(document.body, {
+        childList: true,
+        subtree: true
+        });
+        }
+
+        /**
+        * Track input/textarea changes
+        */
+        document.addEventListener('input', function(event) {
+        const timestamp = new Date().toISOString();
+        const element = event.target;
+        const elementType = getElementType(element);
+
+        const additionalInfo = {
+        value: element.value ? '(value changed)' : 'empty',
+        valueLength: element.value?.length || 0
+        };
+
+        logEvent(timestamp, 'input_change', elementType, element, additionalInfo);
+        }, true);
+
+        /**
+        * Track dropdown/select changes
+        */
+        document.addEventListener('change', function(event) {
+        if (event.target.tagName.toLowerCase() === 'select') {
+        const timestamp = new Date().toISOString();
+        const element = event.target;
+        const elementType = getElementType(element);
+
+        const additionalInfo = {
+        selectedValue: element.value,
+        selectedText: element.options[element.selectedIndex]?.text || 'none'
+        };
+
+        logEvent(timestamp, 'dropdown_change', elementType, element, additionalInfo);
+        }
+        }, true);
+
+        /**
+        * Track form submissions
+        */
+        document.addEventListener('submit', function(event) {
+        const timestamp = new Date().toISOString();
+        const element = event.target;
+
+        logEvent(timestamp, 'form_submit', 'form', element, {});
+        }, true);
+
+        /**
+        * Track scroll events (throttled to prevent console spam)
+        */
+        let scrollTimeout;
+        window.addEventListener('scroll', function() {
+        clearTimeout(scrollTimeout);
+        scrollTimeout = setTimeout(() => {
+        const timestamp = new Date().toISOString();
+        const additionalInfo = {
+        scrollY: window.scrollY,
+        scrollX: window.scrollX,
+        documentHeight: document.documentElement.scrollHeight,
+        viewportHeight: window.innerHeight,
+        scrollPercentage: ((window.scrollY / (document.documentElement.scrollHeight - window.innerHeight)) * 100).toFixed(2)
+        + '%'
+        };
+
+        console.log('%c━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━', 'color: #6366f1');
+        console.log('%c📜 SCROLL EVENT', 'color: #6366f1; font-weight: bold; font-size: 14px');
+        console.log('%c⏰ Timestamp:', 'color: #818cf8; font-weight: bold', timestamp);
+        console.log('%c📊 Scroll Info:', 'color: #818cf8; font-weight: bold');
+        console.table(additionalInfo);
+        console.log('%c━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n', 'color: #6366f1');
+        }, 200); // Throttle to every 200ms
+        });
+
+        /**
+        * Track page load
+        */
+        window.addEventListener('load', function() {
+        const timestamp = new Date().toISOString();
+        console.log('%c━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━', 'color: #5FD38D');
+        console.log('%c🎉 PAGE LOADED - Event Tracking Active', 'color: #5FD38D; font-weight: bold; font-size: 16px');
+        console.log('%c━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━', 'color: #5FD38D');
+        console.log('%c⏰ Timestamp:', 'color: #4fc279; font-weight: bold', timestamp);
+        console.log('%c📄 Page:', 'color: #4fc279; font-weight: bold', document.title);
+        console.log('%c📍 URL:', 'color: #4fc279; font-weight: bold', window.location.href);
+        console.log('%c🖥️ Browser:', 'color: #4fc279; font-weight: bold', navigator.userAgent.substring(0, 100));
+        console.log('%c📱 Screen:', 'color: #4fc279; font-weight: bold', `${window.screen.width}x${window.screen.height}`);
+        console.log('%c━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n', 'color: #5FD38D');
+
+        // Start view tracking after page load
+        setupViewTracking();
+        });
+
+        /**
+        * Track page visibility changes (tab switching)
+        */
+        document.addEventListener('visibilitychange', function() {
+        const timestamp = new Date().toISOString();
+        const state = document.hidden ? 'hidden' : 'visible';
+
+        console.log('%c━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━', 'color: #f59e0b');
+        console.log('%c👁️ PAGE VISIBILITY CHANGED', 'color: #f59e0b; font-weight: bold; font-size: 14px');
+        console.log('%c⏰ Timestamp:', 'color: #fbbf24; font-weight: bold', timestamp);
+        console.log('%c📌 State:', 'color: #fbbf24; font-weight: bold', state);
+        console.log('%c━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n', 'color: #f59e0b');
+        });
+
+        /**
+        * Track page unload
+        */
+        window.addEventListener('beforeunload', function() {
+        const timestamp = new Date().toISOString();
+        console.log('%c━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━', 'color: #ef4444');
+        console.log('%c👋 PAGE UNLOAD', 'color: #ef4444; font-weight: bold; font-size: 16px');
+        console.log('%c⏰ Timestamp:', 'color: #ef4444; font-weight: bold', timestamp);
+        console.log('%c━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n', 'color: #ef4444');
+        });
+
+        // ========================================
+        // END OF EVENT TRACKING SYSTEM
+        // ========================================
+
+    </script>
 </body>
+
 </html>
